@@ -56,45 +56,61 @@ textarea {
    Author's custom styles
    ========================================================================== */
 body,html {
+    height: 100%;
 }
 
 .calculator {
-    border: 0.25em solid #cecece;
+    background-color: #E5989B;
     border-radius: 2em;
-    display: block;
-    margin: auto;
-    padding: 1em;
+    left: 50%;
+    margin: 0;
+    padding: 2em;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 20em;
 }
 
-.display{
-    width: 100%;
+.display {
+    align-items: center;
+    background-color: #FFCDB2;
+    border-radius: 1em;
+    display: flex;
     height: 4em;
-    border: 0.25em solid #cecece;
-    border-radius: 0.25em;
-    box-sizing: border-box;
-    text-align: right;
-    margin-bottom: 1em;
+    justify-content: flex-end;
+    margin-bottom: 2em;
+    margin-top: 1em;
+    padding-right: 1em;
+}
+
+.display output {
+    color: #504D56;
 }
 
 .input {
     display: grid;
+    grid-gap: 1em;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 1em;
+    margin-bottom: 1em;
 }
 
 button {
-    display: inline-block;
+    background-color: #FFCDB2;
+    border-radius: 1em;
+    border: none;
     height: 3em;
-    border: 0.25em solid #cecece;
-    border-radius: 0.25em;
-    margin: none;
+}
+
+#equal {
+    grid-column: span 2;
 }
 
 button label {
+    color: #504D56;
     font-size: 1em;
 }
+
 
 /* ==========================================================================
    Media Queries
