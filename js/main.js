@@ -1,3 +1,5 @@
+let screenNum = "8008135";
+
 function add(a, b) {
   return a + b;
 }
@@ -29,3 +31,16 @@ function operate(a, b, op) {
   }
 }
 
+function setScreen(value) {
+  const output = document.querySelector("output");
+  output.innerText = value;
+}
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    setScreen(e.target.id);
+  });
+});
+
+setScreen(screenNum);
