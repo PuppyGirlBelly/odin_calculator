@@ -1,4 +1,5 @@
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 
 html {
     color: #222;
@@ -113,10 +114,14 @@ body {
 
 button {
     background-color: #FFCDB2;
-    border-radius: 1em;
+    border-radius: 1rem;
     border: none;
-    box-shadow: 0 0.5em #FFB4A2;
-    height: 3em;
+    box-shadow: 0 0.5rem #FFB4A2;
+    color: #504D56;
+    font-family: 'Concert One', monospace;
+    font-size: 2em;
+    height: 3rem;
+    padding-bottom: 0.5rem;
     position: relative;
 }
 
