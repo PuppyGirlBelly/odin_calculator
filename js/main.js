@@ -20,6 +20,13 @@ function updateScreen(value) {
   setScreen(screenNum);
 }
 
+function storeOp(op) {
+  storedOp = op;
+  screenNum = "0";
+  hasDecimal = false;
+  setScreen(0);
+}
+
 function backspace() {
   if (screenNum.length <= 1) {
     screenNum = "0";
@@ -27,6 +34,14 @@ function backspace() {
     screenNum = screenNum.slice(0, -1);
   }
   setScreen(screenNum);
+}
+
+function clear() {
+  screenNum = "0";
+  storedOp = "";
+  storedNum = "";
+  hasDecimal = false;
+  setScreen(0);
 }
 
 function add(a, b) {
@@ -59,6 +74,7 @@ function operate(a, b, op) {
   }
 }
 
+// TODO: Pressing equals repeatedly should repeat last operation.
 function equals() {
   const result = operate(storedNum, screenNum, storedOp);
   if (result === null) {
@@ -66,13 +82,6 @@ function equals() {
   }
   screenNum = result;
   setScreen(screenNum);
-}
-
-function storeOp(op) {
-  storedOp = op;
-  screenNum = "0";
-  hasDecimal = false;
-  setScreen(0);
 }
 
 function eventHandler(input) {
@@ -90,6 +99,8 @@ function eventHandler(input) {
       case "plus":
         storeOp("+");
         break;
+      // TODO: Make it so that if the number is zero, and minus is pressed, it
+      // creates a negative number.
       case "minus":
         storeOp("-");
         break;
@@ -101,6 +112,9 @@ function eventHandler(input) {
         break;
       case "backspace":
         backspace();
+        break;
+      case "clear":
+        clear();
         break;
       default:
         break;
