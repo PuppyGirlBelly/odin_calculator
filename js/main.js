@@ -20,6 +20,15 @@ function updateScreen(value) {
   setScreen(screenNum);
 }
 
+function backspace() {
+  if (screenNum.length <= 1) {
+    screenNum = "0";
+  } else {
+    screenNum = screenNum.slice(0, -1);
+  }
+  setScreen(screenNum);
+}
+
 function add(a, b) {
   return +a + +b;
 }
@@ -35,7 +44,6 @@ function multiply(a, b) {
 function divide(a, b) {
   return a / b;
 }
-
 function operate(a, b, op) {
   switch (op) {
     case "+":
@@ -90,6 +98,9 @@ function eventHandler(input) {
         break;
       case "divide":
         storeOp("/");
+        break;
+      case "backspace":
+        backspace();
         break;
       default:
         break;
