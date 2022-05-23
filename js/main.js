@@ -1,6 +1,7 @@
 let screenNum = "8008135";
 let storedNum;
 let storedOp;
+let hasDecimal = false;
 
 function setScreen(value) {
   const output = document.querySelector("output");
@@ -8,7 +9,7 @@ function setScreen(value) {
 }
 
 function updateScreen(value) {
-  if (screenNum === "0") {
+  if (screenNum === "0" && value !== ".") {
     screenNum = value;
   } else if (screenNum.length >= 9) {
     screenNum = screenNum.substring(1);
@@ -62,12 +63,18 @@ function equals() {
 function storeOp(op) {
   storedOp = op;
   screenNum = "0";
+  hasDecimal = false;
   setScreen(0);
 }
 
 function eventHandler(input) {
   if (input === "equal") {
     equals();
+  } else if (input === ".") {
+    if (!hasDecimal) {
+      updateScreen(input);
+      hasDecimal = true;
+    }
     // eslint-disable-next-line no-restricted-globals
   } else if (isNaN(input)) {
     storedNum = screenNum;
