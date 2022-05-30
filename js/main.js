@@ -36,6 +36,7 @@ function multiply(a, b) {
 function divide(a, b) {
   return a / b;
 }
+
 function operate(a, b, op) {
   switch (op) {
     case '+':
@@ -51,9 +52,9 @@ function operate(a, b, op) {
   }
 }
 
-function storeOp(op) {
+// TODO: Pressing equals repeatedly should repeat last operation.
+function equals() {
   storedNum = operate(storedNum, screenNum, storedOp);
-  storedOp = op;
   screenNum = '0';
   hasDecimal = false;
   setScreen(storedNum);
@@ -67,13 +68,6 @@ function clear() {
   setScreen(0);
 }
 
-// TODO: Pressing equals repeatedly should repeat last operation.
-function equals() {
-  const result = operate(storedNum, screenNum, storedOp);
-  screenNum = result;
-  setScreen(screenNum);
-}
-
 function eventHandler(input) {
   if (input === '.') {
     if (!hasDecimal) {
@@ -82,7 +76,6 @@ function eventHandler(input) {
     }
     // eslint-disable-next-line no-restricted-globals
   } else if (isNaN(input)) {
-    storedNum = screenNum;
     switch (input) {
       case 'equal':
         equals();
@@ -94,7 +87,8 @@ function eventHandler(input) {
         clear();
         break;
       default:
-        storeOp(input);
+        equals();
+        storedOp = input;
         break;
     }
   } else if (input !== '.') {
