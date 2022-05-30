@@ -15,6 +15,12 @@ function updateScreen(value) {
   setScreen(screenNum);
 }
 
+function insertDecimal() {
+  if (hasDecimal) return;
+  updateScreen(input);
+  hasDecimal = true;
+}
+
 function backspace() {
   if (screenNum.length <= 1) screenNum = '0';
   if (screenNum.length > 1) screenNum = screenNum.slice(0, -1);
@@ -60,6 +66,11 @@ function equals() {
   setScreen(storedNum);
 }
 
+function storeOp(op) {
+  equals();
+  storedOp = op;
+}
+
 function clear() {
   screenNum = '0';
   storedOp = '+';
@@ -69,14 +80,11 @@ function clear() {
 }
 
 function eventHandler(input) {
-  if (input === '.') {
-    if (!hasDecimal) {
-      updateScreen(input);
-      hasDecimal = true;
-    }
-    // eslint-disable-next-line no-restricted-globals
-  } else if (isNaN(input)) {
+  // eslint-disable-next-line no-restricted-globals
+  if (isNaN(input)) {
     switch (input) {
+      case '.':
+        insertDecimal();
       case 'equal':
         equals();
         break;
@@ -87,13 +95,11 @@ function eventHandler(input) {
         clear();
         break;
       default:
-        equals();
-        storedOp = input;
+        storedOp(input);
         break;
     }
-  } else if (input !== '.') {
-    updateScreen(input);
   }
+  updateScreen(input);
 }
 
 const buttons = document.querySelectorAll('button');
