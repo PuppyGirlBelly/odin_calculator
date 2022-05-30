@@ -1,47 +1,24 @@
-let screenNum = "8008135";
-let storedNum;
-let storedOp;
+let screenNum = '0';
+let storedNum = '0';
+let storedOp = '+';
 let hasDecimal = false;
 
 function setScreen(value) {
-  const output = document.querySelector("output");
+  const output = document.querySelector('output');
   output.innerText = value;
 }
 
 function updateScreen(value) {
-  if (screenNum === "0" && value !== ".") {
-    screenNum = value;
-  } else if (screenNum.length >= 9) {
-    screenNum = screenNum.substring(1);
-    screenNum += value;
-  } else {
-    screenNum += value;
-  }
+  if (screenNum.length >= 9) return;
+  if (screenNum !== '0') screenNum += value;
+  if (screenNum === '0' && value !== '.') screenNum = value;
   setScreen(screenNum);
-}
-
-function storeOp(op) {
-  storedOp = op;
-  screenNum = "0";
-  hasDecimal = false;
-  setScreen(0);
 }
 
 function backspace() {
-  if (screenNum.length <= 1) {
-    screenNum = "0";
-  } else {
-    screenNum = screenNum.slice(0, -1);
-  }
+  if (screenNum.length <= 1) screenNum = '0';
+  if (screenNum.length > 1) screenNum = screenNum.slice(0, -1);
   setScreen(screenNum);
-}
-
-function clear() {
-  screenNum = "0";
-  storedOp = "";
-  storedNum = "";
-  hasDecimal = false;
-  setScreen(0);
 }
 
 function add(a, b) {
@@ -61,33 +38,44 @@ function divide(a, b) {
 }
 function operate(a, b, op) {
   switch (op) {
-    case "+":
+    case '+':
       return add(a, b);
-    case "-":
+    case '-':
       return subtract(a, b);
-    case "*":
+    case '*':
       return multiply(a, b);
-    case "/":
+    case '/':
       return divide(a, b);
     default:
       return null;
   }
 }
 
+function storeOp(op) {
+  storedNum = operate(storedNum, screenNum, storedOp);
+  storedOp = op;
+  screenNum = '0';
+  hasDecimal = false;
+  setScreen(storedNum);
+}
+
+function clear() {
+  screenNum = '0';
+  storedOp = '+';
+  storedNum = '0';
+  hasDecimal = false;
+  setScreen(0);
+}
+
 // TODO: Pressing equals repeatedly should repeat last operation.
 function equals() {
   const result = operate(storedNum, screenNum, storedOp);
-  if (result === null) {
-    return;
-  }
   screenNum = result;
   setScreen(screenNum);
 }
 
 function eventHandler(input) {
-  if (input === "equal") {
-    equals();
-  } else if (input === ".") {
+  if (input === '.') {
     if (!hasDecimal) {
       updateScreen(input);
       hasDecimal = true;
@@ -96,37 +84,27 @@ function eventHandler(input) {
   } else if (isNaN(input)) {
     storedNum = screenNum;
     switch (input) {
-      case "plus":
-        storeOp("+");
+      case 'equal':
+        equals();
         break;
-      // TODO: Make it so that if the number is zero, and minus is pressed, it
-      // creates a negative number.
-      case "minus":
-        storeOp("-");
-        break;
-      case "multiply":
-        storeOp("*");
-        break;
-      case "divide":
-        storeOp("/");
-        break;
-      case "backspace":
+      case 'backspace':
         backspace();
         break;
-      case "clear":
+      case 'clear':
         clear();
         break;
       default:
+        storeOp(input);
         break;
     }
-  } else if (input !== ".") {
+  } else if (input !== '.') {
     updateScreen(input);
   }
 }
 
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
-  button.addEventListener("click", (e) => {
+  button.addEventListener('click', (e) => {
     eventHandler(e.target.id);
   });
 });
