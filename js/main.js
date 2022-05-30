@@ -15,6 +15,12 @@ function updateScreen(value) {
   setScreen(screenNum);
 }
 
+function insertDecimal() {
+  if (hasDecimal) return;
+  updateScreen(input);
+  hasDecimal = true;
+}
+
 function backspace() {
   if (screenNum.length <= 1) screenNum = '0';
   if (screenNum.length > 1) screenNum = screenNum.slice(0, -1);
@@ -36,6 +42,7 @@ function multiply(a, b) {
 function divide(a, b) {
   return a / b;
 }
+
 function operate(a, b, op) {
   switch (op) {
     case '+':
@@ -51,12 +58,17 @@ function operate(a, b, op) {
   }
 }
 
-function storeOp(op) {
+// TODO: Pressing equals repeatedly should repeat last operation.
+function equals() {
   storedNum = operate(storedNum, screenNum, storedOp);
-  storedOp = op;
   screenNum = '0';
   hasDecimal = false;
   setScreen(storedNum);
+}
+
+function storeOp(op) {
+  equals();
+  storedOp = op;
 }
 
 function clear() {
@@ -67,23 +79,12 @@ function clear() {
   setScreen(0);
 }
 
-// TODO: Pressing equals repeatedly should repeat last operation.
-function equals() {
-  const result = operate(storedNum, screenNum, storedOp);
-  screenNum = result;
-  setScreen(screenNum);
-}
-
 function eventHandler(input) {
-  if (input === '.') {
-    if (!hasDecimal) {
-      updateScreen(input);
-      hasDecimal = true;
-    }
-    // eslint-disable-next-line no-restricted-globals
-  } else if (isNaN(input)) {
-    storedNum = screenNum;
+  // eslint-disable-next-line no-restricted-globals
+  if (isNaN(input)) {
     switch (input) {
+      case '.':
+        insertDecimal();
       case 'equal':
         equals();
         break;
@@ -97,9 +98,9 @@ function eventHandler(input) {
         storeOp(input);
         break;
     }
-  } else if (input !== '.') {
-    updateScreen(input);
+    return;
   }
+  updateScreen(input);
 }
 
 const buttons = document.querySelectorAll('button');
