@@ -124,16 +124,29 @@ function eventHandler(input) {
   updateScreen(input);
 }
 
+function animateKey(event) {
+  let key = event.key ;
+  if (key === "Enter") key = "=";
+  if (key === "Escape") key = "clear";
+  const div = document.querySelector(`#${CSS.escape(key)}`);
+  div.classList.add('pressed');
+}
+
+function removeTransition(e) {
+  if (e.propertyName !== 'box-shadow') return;
+  e.target.classList.remove('pressed');
+}
+
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
     eventHandler(e.target.id);
   });
+  button.addEventListener('transitionend', removeTransition);
 });
 
 setScreen(screenNum);
 
-window.addEventListener('keydown', (event) => {
-  console.log(`Key: ${event.key}`);
-  eventHandler(event.key);
-});
+window.addEventListener('keydown', (event) => eventHandler(event.key));
+window.addEventListener('keydown', (event) => removeTransition(event));
+window.addEventListener('keydown', (event) => animateKey(event));
