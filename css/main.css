@@ -1,273 +1,103 @@
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 
-html {
-    color: #222;
-    font-size: 1em;
-    line-height: 1.4;
-}
-
-::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-    vertical-align: middle;
-}
-
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-textarea {
-    resize: vertical;
-}
-
-.browserupgrade {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
-
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
 @font-face {
-    font-family: "DSEG7";
-    src: url("../font/DSEG7Modern-BoldItalic.woff2") format("woff2");
+  font-family: "DSEG7";
+  src: url("../font/DSEG7Modern-BoldItalic.woff2") format("woff2");
 }
 
 body,html {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    background-image: url('../img/background.gif');
-    background-position: center;
-    background-size: cover;
+  background-image: url('../img/background.gif');
+  background-position: center;
+  background-size: cover;
 }
 
 .calculator {
-    background-color: #E5989B;
-    border-radius: 2em;
-    box-shadow: 0 1em #B5838D;
-    left: 50%;
-    margin: 0;
-    padding: 2em;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 20em;
+  background-color: #E5989B;
+  border-radius: 2em;
+  box-shadow: 0 1em #B5838D;
+  left: 50%;
+  margin: 0;
+  padding: 2em;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20em;
 }
 
 .display {
-    align-items: center;
-    background-color: #FFCDB2;
-    border-radius: 1em;
-    box-shadow: 0 -0.25em #FFB4A2;
-    display: flex;
-    height: 4em;
-    justify-content: flex-end;
-    margin-bottom: 2em;
-    margin-top: 1em;
-    padding-right: 1em;
+  align-items: center;
+  background-color: #FFCDB2;
+  border-radius: 1em;
+  box-shadow: 0 -0.25em #FFB4A2;
+  display: flex;
+  height: 4em;
+  justify-content: flex-end;
+  margin-bottom: 2em;
+  margin-top: 1em;
+  padding-right: 1em;
 }
 
 .display output {
-    color: #504D56;
-    font-family: "DSEG7", sans-serif;
-    font-size: 2.5em;
-    text-shadow: -0.075em 0.05em #FFB4A2;
+  color: #504D56;
+  font-family: "DSEG7", sans-serif;
+  font-size: 2.5em;
+  text-shadow: -0.075em 0.05em #FFB4A2;
 }
 
 .input {
-    display: grid;
-    grid-gap: 1em;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    margin-bottom: 1em;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  margin-bottom: 1em;
 }
 
 button {
-    background-color: #FFCDB2;
-    border-radius: 1rem;
-    border: none;
-    box-shadow: 0 0.5rem #FFB4A2;
-    color: #504D56;
-    font-family: 'Concert One', monospace;
-    font-size: 2em;
-    height: 3rem;
-    padding-bottom: 0.5rem;
-    position: relative;
+  border-radius: 1rem;
+  border: none;
+  font-family: 'Concert One', monospace;
+  font-size: 2em;
+  height: 3rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+  top: 0;
+  transition: 0.15s;
 }
 
-#equal {
-    grid-column: span 2;
+.operator {
+  background-color: #6D6875;
+  box-shadow: 0 0.5rem #504D56;
+  color: #FFCDB2;
 }
 
-button:hover {
-    bottom: -0.2em;
-    box-shadow: 0 0.35em #FFB4A2;
+.number {
+  background-color: #FFCDB2;
+  box-shadow: 0 0.5rem #FFB4A2;
+  color: #504D56;
 }
 
-button:active {
-    bottom: -0.5em;
-    box-shadow: none;
+.equal {
+  grid-column: span 2;
 }
 
-button label {
-    color: #504D56;
-    font-size: 1em;
+.operator:hover, .number:hover {
+  top: 0.25rem;
 }
 
-
-/* ==========================================================================
-   Media Queries
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-
+.operator:hover {
+  box-shadow: 0 0.25rem #504D56;
 }
 
-@media print,
-       (-o-min-device-pixel-ratio: 5/4),
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 120dpi) {
-
+.number:hover {
+  box-shadow: 0 0.25rem #FFB4A2;
 }
 
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-.hidden {
-    display: none !important;
-    visibility: hidden;
-}
-
-.visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus {
-    clip: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
-}
-
-.invisible {
-    visibility: hidden;
-}
-
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-.clearfix {
-    *zoom: 1;
-}
-
-/* ==========================================================================
-   Print styles
-   ========================================================================== */
-
-@media print {
-    *,
-    *:before,
-    *:after {
-        background: transparent !important;
-        color: #000 !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
-
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
-
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
-
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
-
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
-        content: "";
-    }
-
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-
-    thead {
-        display: table-header-group;
-    }
-
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-
-    img {
-        max-width: 100% !important;
-    }
-
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
+.number:active, .hover:active {
+  top: 0.5rem;
+  box-shadow: none;
 }
