@@ -1,10 +1,12 @@
-/*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
-@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
-
 @font-face {
   font-family: "DSEG7";
   src: url("../font/DSEG7Modern-BoldItalic.woff2") format("woff2");
 }
+@font-face {
+  font-family: "Concert One";
+  src: url("../font/ConcertOne-Regular.ttf") format("truetype");
+}
+
 
 body,html {
   height: 100%;
