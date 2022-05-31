@@ -65,6 +65,11 @@ function operate(a, b, op) {
 }
 
 function equals() {
+  if (storedOp === '/' && screenNum === '0') {
+    clear();
+    setScreen('nope. err.');
+    return;
+  }
   let result = operate(storedNum, screenNum, storedOp);
   storedNum = limitStringLength(result.toString());
   hitEnter = true;
