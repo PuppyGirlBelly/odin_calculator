@@ -3,6 +3,12 @@ let storedNum = '0';
 let storedOp = '+';
 let hasDecimal = false;
 let hitEnter = false;
+const maxLength = 9;
+
+function limitStringLength(input) {
+  if (input.length >= maxLength) return input.slice(0, maxLength);
+  return input;
+}
 
 function setScreen(value) {
   const output = document.querySelector('output');
@@ -10,8 +16,7 @@ function setScreen(value) {
 }
 
 function updateScreen(value) {
-  if (screenNum.length >= 9) return;
-  if (screenNum !== '0') screenNum += value;
+  if (screenNum !== '0' || value === '.') screenNum += value;
   if (screenNum === '0' && value !== '.') screenNum = value;
   setScreen(screenNum);
 }
@@ -59,10 +64,10 @@ function operate(a, b, op) {
   }
 }
 
-// TODO: Pressing equals repeatedly should repeat last operation.
 function equals() {
+  let result = operate(storedNum, screenNum, storedOp);
+  storedNum = limitStringLength(result.toString());
   hitEnter = true;
-  storedNum = operate(storedNum, screenNum, storedOp);
   setScreen(storedNum);
 }
 
