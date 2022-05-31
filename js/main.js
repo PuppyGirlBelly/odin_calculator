@@ -92,12 +92,21 @@ function clear() {
   setScreen(0);
 }
 
+function negative() {
+  screenNum *= -1;
+  setScreen(screenNum);
+}
+
 function eventHandler(input) {
   // eslint-disable-next-line no-restricted-globals
   if (isNaN(input)) {
     switch (input) {
       case '.':
         insertDecimal();
+        break;
+      case 'negative':
+        negative();
+        break;
       case 'Backspace':
         backspace();
         break;
