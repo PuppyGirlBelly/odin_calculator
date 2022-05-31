@@ -2,6 +2,7 @@ let screenNum = '0';
 let storedNum = '0';
 let storedOp = '+';
 let hasDecimal = false;
+let hitEnter = false;
 
 function setScreen(value) {
   const output = document.querySelector('output');
@@ -60,15 +61,16 @@ function operate(a, b, op) {
 
 // TODO: Pressing equals repeatedly should repeat last operation.
 function equals() {
+  hitEnter = true;
   storedNum = operate(storedNum, screenNum, storedOp);
-  screenNum = '0';
-  hasDecimal = false;
   setScreen(storedNum);
 }
 
 function storeOp(op) {
-  equals();
   storedOp = op;
+  screenNum = '0';
+  hasDecimal = false;
+  hitEnter = false;
 }
 
 function clear() {
@@ -76,6 +78,7 @@ function clear() {
   storedOp = '+';
   storedNum = '0';
   hasDecimal = false;
+  hitEnter = false;
   setScreen(0);
 }
 
@@ -85,21 +88,23 @@ function eventHandler(input) {
     switch (input) {
       case '.':
         insertDecimal();
-      case 'equal':
-        equals();
-        break;
       case 'backspace':
         backspace();
         break;
       case 'clear':
         clear();
         break;
+      case 'equal':
+        equals();
+        break;
       default:
+        equals();
         storeOp(input);
         break;
     }
     return;
   }
+  if (hitEnter) clear();
   updateScreen(input);
 }
 
