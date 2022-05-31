@@ -98,18 +98,24 @@ function eventHandler(input) {
     switch (input) {
       case '.':
         insertDecimal();
-      case 'backspace':
+      case 'Backspace':
         backspace();
         break;
       case 'clear':
+      case 'Escape':
         clear();
         break;
-      case 'equal':
+      case '=':
+      case 'Enter':
         equals();
         break;
-      default:
+      case '+':
+      case '-':
+      case '/':
+      case '*':
         equals();
         storeOp(input);
+      default:
         break;
     }
     return;
@@ -126,3 +132,8 @@ buttons.forEach((button) => {
 });
 
 setScreen(screenNum);
+
+window.addEventListener('keydown', (event) => {
+  console.log(`Key: ${event.key}`);
+  eventHandler(event.key);
+});
